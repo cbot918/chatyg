@@ -6,23 +6,24 @@ import (
 	"os"
 )
 
-type Chat struct {
+type ChatCli struct {
 	UserName string
 	Conn     net.Conn
 }
 
-func InitChat(url string, userName string) *Chat {
-	c := new(Chat)
+func InitChatCli(url string, userName string) *ChatCli {
+	c := new(ChatCli)
 	var err error
 	c.Conn, err = net.Dial("tcp", url)
 	if err != nil {
 		fmt.Println("net.Dial failed")
 		os.Exit(1)
 	}
+
 	return c
 }
 
-func (c *Chat) Message() {
+func (c *ChatCli) Message() {
 
 	defer c.Conn.Close()
 	for {
